@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Standard Music</title>
+    <!-- Fuentes y Fuentes de Iconos -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="logo-container">
+                <i class="fa-solid fa-wave-square logo-icon"></i>
+                <h1 class="logo-text">Standard <span>Music</span></h1>
+            </div>
+
+            <nav class="nav-menu">
+                <button class="nav-btn active" data-target="library"><i class="fa-solid fa-music"></i> Biblioteca</button>
+                <button class="nav-btn" data-target="albums"><i class="fa-solid fa-compact-disc"></i> Álbumes</button>
+                <button class="nav-btn" data-target="equalizer"><i class="fa-solid fa-sliders"></i> Ecualizador</button>
+            </nav>
+
+            <div class="upload-section">
+                <label for="audio-upload" class="upload-btn">
+                    <i class="fa-solid fa-cloud-arrow-up"></i> Cargar Canciones
+                </label>
+                <input type="file" id="audio-upload" accept="audio/*" multiple hidden>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header Section -->
+            <header class="top-header">
+                <button class="menu-toggle" id="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="search-input" placeholder="Buscar canciones, artistas o álbumes...">
+                </div>
+            </header>
+
+            <!-- Views Container -->
+            <div class="content-body">
+                <!-- Section 1: Music Library & Carousel -->
+                <section id="library-view" class="view-section active">
+                    <!-- Carousel Featured Tracks -->
+                    <div class="carousel-container">
+                        <h2 class="section-title"><i class="fa-solid fa-star"></i> Canciones Destacadas</h2>
+                        <div class="carousel-wrapper">
+                            <button class="carousel-nav prev" id="carousel-prev"><i class="fa-solid fa-chevron-left"></i></button>
+                            <div class="carousel-track" id="carousel-track">
+                                <div class="empty-msg">Carga canciones para verlas destacadas en el carrusel</div>
+                            </div>
+                            <button class="carousel-nav next" id="carousel-next"><i class="fa-solid fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Song Cards Grid -->
+                    <div class="grid-container">
+                        <h2 class="section-title"><i class="fa-solid fa-list-ul"></i> Todas las Canciones</h2>
+                        <div class="cards-grid" id="songs-grid">
+                            <div class="empty-msg">No hay canciones cargadas aún. ¡Agrega tus temas favoritos!</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 2: Albums Organizer -->
+                <section id="albums-view" class="view-section">
+                    <div class="albums-header">
+                        <h2 class="section-title"><i class="fa-solid fa-compact-disc"></i> Mis Álbumes</h2>
+                        <button class="action-btn" id="create-album-btn"><i class="fa-solid fa-plus"></i> Crear Álbum</button>
+                    </div>
+                    <div class="albums-grid" id="albums-grid">
+                        <!-- Dynamic Albums Content -->
+                    </div>
+                </section>
+
+                <!-- Section 3: Equalizer & Audio FX -->
+                <section id="equalizer-view" class="view-section">
+                    <h2 class="section-title"><i class="fa-solid fa-sliders"></i> Ecualizador de Audio</h2>
+                    <div class="eq-card">
+                        <div class="eq-controls-top">
+                            <label class="switch-label">
+                                <span>Activar Ecualizador</span>
+                                <input type="checkbox" id="eq-toggle">
+                                <span class="switch-slider"></span>
+                            </label>
+                            <div class="preset-selector">
+                                <label for="eq-preset">Preajustes:</label>
+                                <select id="eq-preset">
+                                    <option value="flat">Plano / Normal</option>
+                                    <option value="bass">Bass Boost</option>
+                                    <option value="pop">Pop</option>
+                                    <option value="rock">Rock</option>
+                                    <option value="vocal">Vocal Boost</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Equalizer Sliders Frequencies -->
+                        <div class="eq-sliders-container">
+                            <div class="eq-slider-group">
+                                <span class="eq-value" id="val-60">0dB</span>
+                                <input type="range" class="eq-band" data-freq="60" min="-12" max="12" value="0" step="1">
+                                <span class="eq-label">60Hz</span>
+                            </div>
+                            <div class="eq-slider-group">
+                                <span class="eq-value" id="val-230">0dB</span>
+                                <input type="range" class="eq-band" data-freq="230" min="-12" max="12" value="0" step="1">
+                                <span class="eq-label">230Hz</span>
+                            </div>
+                            <div class="eq-slider-group">
+                                <span class="eq-value" id="val-910">0dB</span>
+                                <input type="range" class="eq-band" data-freq="910" min="-12" max="12" value="0" step="1">
+                                <span class="eq-label">910Hz</span>
+                            </div>
+                            <div class="eq-slider-group">
+                                <span class="eq-value" id="val-3600">0dB</span>
+                                <input type="range" class="eq-band" data-freq="3600" min="-12" max="12" value="0" step="1">
+                                <span class="eq-label">3.6kHz</span>
+                            </div>
+                            <div class="eq-slider-group">
+                                <span class="eq-value" id="val-14000">0dB</span>
+                                <input type="range" class="eq-band" data-freq="14000" min="-12" max="12" value="0" step="1">
+                                <span class="eq-label">14kHz</span>
+                            </div>
+                        </div>
+
+                        <!-- Audio Visualizer Canvas -->
+                        <div class="visualizer-box">
+                            <canvas id="visualizer-canvas"></canvas>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Bottom Player Bar -->
+        <footer class="player-bar">
+            <!-- Currently Playing Info -->
+            <div class="track-info">
+                <div class="track-cover-container">
+                    <img id="player-cover" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=150&q=80" alt="Cover">
+                </div>
+                <div class="track-details">
+                    <h4 id="player-title">Standard Music</h4>
+                    <p id="player-artist">Selecciona o carga una canción</p>
+                </div>
+            </div>
+
+            <!-- Central Player Controls -->
+            <div class="player-center">
+                <div class="player-controls">
+                    <button class="control-btn" id="btn-shuffle" title="Aleatorio"><i class="fa-solid fa-shuffle"></i></button>
+                    <button class="control-btn" id="btn-prev" title="Anterior"><i class="fa-solid fa-backward-step"></i></button>
+                    <button class="control-btn play-btn" id="btn-play" title="Reproducir"><i class="fa-solid fa-play"></i></button>
+                    <button class="control-btn" id="btn-next" title="Siguiente"><i class="fa-solid fa-forward-step"></i></button>
+                    <button class="control-btn" id="btn-repeat" title="Repetir"><i class="fa-solid fa-repeat"></i></button>
+                </div>
+                <div class="progress-container">
+                    <span id="current-time">0:00</span>
+                    <input type="range" id="progress-bar" value="0" min="0" max="100">
+                    <span id="total-duration">0:00</span>
+                </div>
+            </div>
+
+            <!-- Volume & Settings -->
+            <div class="player-right">
+                <i class="fa-solid fa-volume-high" id="volume-icon"></i>
+                <input type="range" id="volume-bar" min="0" max="1" step="0.01" value="0.8">
+            </div>
+        </footer>
+    </div>
+
+    <!-- Hidden Audio Element -->
+    <audio id="audio-element" crossorigin="anonymous"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
